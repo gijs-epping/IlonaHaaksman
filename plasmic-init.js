@@ -1,4 +1,7 @@
 import { initPlasmicLoader } from "@plasmicapp/loader-nextjs";
+import ImageUploader from "./components/ImageUploader";
+import ImageGallery from "./components/ImageGallery";
+import GalleryDataProvider from "./components/GalleryDataProvider";
 
 export const PLASMIC = initPlasmicLoader({
   projects: [
@@ -22,4 +25,31 @@ export const PLASMIC = initPlasmicLoader({
 // http://localhost:3000/plasmic-host).  See
 // https://docs.plasmic.app/learn/app-hosting/#set-a-plasmic-project-to-use-your-app-host
 
-// PLASMIC.registerComponent(...);
+// Register the ImageUploader component
+PLASMIC.registerComponent(ImageUploader, {
+  name: "ImageUploader",
+  props: {
+    className: "string",
+  },
+  description: "A component that allows uploading images with titles, storing them in public/images with corresponding markdown metadata files",
+});
+
+// Register the GalleryDataProvider component
+PLASMIC.registerComponent(GalleryDataProvider, {
+  name: "GalleryDataProvider",
+  props: {
+    className: "string",
+    children: "slot"
+  },
+  providesData: true,
+  description: "Provides gallery images data for use in Plasmic Studio",
+});
+
+// Register the ImageGallery component
+PLASMIC.registerComponent(ImageGallery, {
+  name: "ImageGallery",
+  props: {
+    className: "string",
+  },
+  description: "Displays uploaded images with options to edit titles and delete images",
+});
